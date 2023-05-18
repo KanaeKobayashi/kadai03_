@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>じゃんけんゲーム</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link href="https://fonts.googleapis.com/earlyaccess/kokoro.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="img/janken-plate_ec.png" type="image/x-icon">
+</head>
+<body class="wrapper">
+    <div class="container">
+        <div>
+            <h1 class="tytle">Rock-Paper-Scissors</h1>
+            <p>何秒で5回勝つことが出来るかな？</p>
+            
+        </div>
+        <div>
+            <button id="btn_start" class="start" >Start!</button>
+            <audio id="btn_audio">
+                <source src ="music/Sine_Day.mp3" type="audio/mp3">
+            </audio>
+            <div id="instructions" style="display: none;">
+                <p >コンピュータに<span class="instructions">従って</span>ね</p>
+            </div>
+        </div>
+
+
+        <div class="boad">
+            <div class="panel computer">
+                <h2>Computer</h2>
+                <div id="computerHand" class="handWrapper">?</div>
+            </div>
+            <div class="panel you">
+                <h2>You</h2>
+                <div id="g_btn_str_you">?</div>
+            </div>
+        </div>
+        <div class="handYWrapper">
+            <button id="rock" class="hand rock" onClick="rock">グー</button>
+            <button id="scissors" class="hand scissors" onClick="scissors">チョキ</button>
+            <button id="paper" class="hand paper" onClick="paper">パー</button>
+            <audio id="btn_audio2">
+                <source src ="music/quick.mp3" type="audio/mp3">
+            </audio>
+        </div>
+
+        <div id="outcome" class="outcome">結果</div>
+        <audio id="btn_audio3">
+            <source src ="music/yes.mp3" type="audio/mp3">
+        </audio>
+        <audio id="btn_audio4">
+            <source src ="music/no.mp3" type="audio/mp3">
+        </audio>
+        <div id="score" class="score">
+            <div>勝ち: <span id="win">0</span>回
+            </div>
+            <div>負け: <span id="lose">0</span>回
+            </div>            
+        </div>
+        <p id="winRate" style="display: none;">Win rate: 0%</p>
+        <p id="playtime"style="display: none;">プレイ時間: </p>
+        <div id="reflection"></div>
+        
+        <button id="reStart" class="reStart" onClick="window.location.reload();">
+            Reset
+        </button>
+        <div><a href="index.html">home</a></div>
+
+        <!-- <div id="scoreboard"></div>
+        <table id="ranking"></table> -->
+    </div>
+     <!-- jqueryを先に -->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
