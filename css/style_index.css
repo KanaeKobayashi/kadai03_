@@ -151,6 +151,7 @@ p{
     position: relative;
     transition: all 0.2s;
     transform:translateY(250px) ;
+    cursor: pointer;
 }
 
 .button2 {
