@@ -55,9 +55,9 @@
             <source src ="music/no.mp3" type="audio/mp3">
         </audio>
         <div id="score" class="score">
-            <div>勝ち: <span id="win">0</span>回
+            <div class="collect">正解: <span id="win">0</span>回
             </div>
-            <div>負け: <span id="lose">0</span>回
+            <div class="unCollect">不正解: <span id="lose">0</span>回
             </div>            
         </div>
         <p id="winRate" style="display: none;">Win rate: 0%</p>
@@ -69,8 +69,12 @@
         </button>
         <div><a href="index.html">home</a></div>
 
-        <!-- <div id="scoreboard"></div>
-        <table id="ranking"></table> -->
+        <div id="ranking-container">
+            <h2>ランキング</h2>
+            <ul id="ranking">
+              <!-- ランキング追加 -->
+            </ul>
+          </div>
     </div>
      <!-- jqueryを先に -->
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

@@ -55,7 +55,7 @@ const audio2 = document.getElementById("btn_audio2");
 
 rockButton.addEventListener("click", function() {
   userHand = "rock";
-  console.log(userHand);
+  // console.log(userHand);
   audio2.play();
   	//ユーザーの選んだグーチョキパーの画像を表示
 	$('#g_btn_str_you').html('<img src="img/janken_0.png" />');
@@ -69,7 +69,7 @@ rockButton.addEventListener("click", function() {
 paperButton.addEventListener("click", function() {
   userHand = "paper";
   audio2.play();
-  console.log(userHand);
+  // console.log(userHand);
     	//ユーザーの選んだグーチョキパーの画像を表示
 	$('#g_btn_str_you').html('<img src="img/janken_2.png" />');
   const result = judge();
@@ -82,7 +82,7 @@ paperButton.addEventListener("click", function() {
 scissorsButton.addEventListener("click", function() {
   userHand = "scissors";
   audio2.play();
-  console.log(userHand);
+  // console.log(userHand);
     	//ユーザーの選んだグーチョキパーの画像を表示
 	$('#g_btn_str_you').html('<img src="img/janken_1.png" />');
   const result = judge();
@@ -111,33 +111,32 @@ function judge() {
       (instructions === "負けて" && computerHand === "チョキ" && userHand === "paper") ||
       (instructions === "負けて" && computerHand === "パー" && userHand === "rock")) {
 
-    console.log("勝ちました");
+    // console.log("勝ちました");
     resultElement.innerText = "あなたの勝ち！";
     audio3.play();
 
     totalGames++;
-    console.log(winCount);
+    // console.log(winCount);
     winCountElement.innerText = parseInt(winCountElement.innerText) + 1;
     winCount++;
- // 勝利回数が5回に達した場合、ゲーム終了とする
- if (winCount === 5) {
+// 勝利回数が5回に達した場合、ゲーム終了とする
+if (winCount === 5) {
   resultElement.innerText = "ゲーム終了！";
   startButton.disabled = true;
   const endTime = new Date();
-// 勝率の計算と表示を行う
-const winRate = (winCount / totalGames) * 100;
-winRateElement.innerText = `勝率: ${winRate.toFixed(2)}%`;
+    // 勝率の計算と表示を行う
+    const winRate = (winCount / totalGames) * 100;
+    winRateElement.innerText = `勝率: ${winRate.toFixed(2)}%`;
 
+    const playtime = Math.floor((endTime - startTime) / 1000);
+    playtimeElement.innerText = "プレイ時間: " + playtime + "秒";
 
-
-  const playtime = Math.floor((endTime - startTime) / 1000);
-  playtimeElement.innerText = "プレイ時間: " + playtime + "秒";
-
-  winRateElement.style.display = "block";
-  playtimeElement.style.display = "block";
+    winRateElement.style.display = "block";
+    playtimeElement.style.display = "block";
   // 音楽停止
-  audio.pause();
-  audio.currentTime = 0;
+    audio.pause();
+    audio.currentTime = 0;
+    saveRanking(playtime);//ランキングを追加するために時間をセーブする
 
   return resultElement.innerText;
 } else {
@@ -145,7 +144,7 @@ winRateElement.innerText = `勝率: ${winRate.toFixed(2)}%`;
 }
     return "win";
   } else {
-    console.log("負けました");
+    // console.log("負けました");
     resultElement.innerText = "あなたの負け…";
     audio4.play();
     loseCountElement.innerText = parseInt(loseCountElement.innerText) + 1;
@@ -182,5 +181,52 @@ function startNextGame() {
   $('#reflection').html('');
 }
 
+// ゲームの結果をランキングに追加し、localStorageに保存する
+function saveRanking(playtime) {
+  const rankingEntry = {
+    playtime: playtime,
+    winCount: winCount,
+    totalGames: totalGames,
+  };
+  ranking.push(rankingEntry);
+  localStorage.setItem('ranking', JSON.stringify(ranking));
+}
 
+// localStorageからランキングを読み出す
+function loadRanking() {
+  const loadedRanking = localStorage.getItem('ranking');
+  if (loadedRanking) {
+    ranking = JSON.parse(loadedRanking);
+  }
+}
+
+// ページが読み込まれたときにランキングを読み出す
+window.onload = function() {
+  loadRanking();
+}
+
+// localStorageからランキングを読み出し、HTMLに表示する
+function loadRanking() {
+  const loadedRanking = localStorage.getItem('ranking');
+  if (loadedRanking) {
+    ranking = JSON.parse(loadedRanking);
+    updateRankingDisplay();  // ランキングの表示を更新
+  }
+}
+// ランキングの表示を更新する
+function updateRankingDisplay() {
+  // プレイ時間の昇順にランキングをソート
+  ranking.sort((a, b) => a.playtime - b.playtime);
+  
+  // HTML要素の準備
+  const rankingElement = document.getElementById("ranking");
+  rankingElement.innerHTML = '';  // 既存のランキング表示をクリア
+
+  // ソートされたランキングをHTMLに反映
+  ranking.forEach((entry, index) => {
+    const li = document.createElement('li');
+    li.innerText = `順位 ${index + 1}位: ${entry.playtime} 秒 (正解: ${entry.winCount}回, 総プレイ数: ${entry.totalGames}回)`;
+    rankingElement.appendChild(li);
+  });
+}
 

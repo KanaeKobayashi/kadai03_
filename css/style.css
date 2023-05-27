@@ -156,30 +156,18 @@ img {
     display: flex;
     justify-content: center;
 }
+
+.collect{
+    padding: 0 25px;
+}
+.unCollect{
+    padding: 0 25px;
+}
+
 #ranking {
     margin-top: 20px;
     width: 100%;
+    font-size: 1.1rem;
     border-collapse: collapse;
     font-family: 'Noto Sans JP', sans-serif;
   }
-  
-  #ranking th,
-  #ranking td {
-    padding: 10px;
-    text-align: center;
-    border: 1px solid #CCCCCC;
-  }
-  
-  #ranking th {
-    background-color: #5198B7;
-    color: #FFFFFF;
-  }
-  
-  #ranking td {
-    background-color: #FFFFFF;
-  }
-  
-  #ranking tr:nth-child(even) td {
-    background-color: #F2F2F2;
-  }
-  
