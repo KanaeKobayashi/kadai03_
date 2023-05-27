@@ -37,7 +37,12 @@ h1 {
     color: #432;
     font-family: 'Amatic SC', cursive;
 }
-
+@media screen and (max-width: 768px){
+    h1{
+        transform: translateY(-50px);
+        font-size: 4rem;
+    }
+}
 
 
 p{
@@ -153,7 +158,11 @@ p{
     transform:translateY(250px) ;
     cursor: pointer;
 }
-
+@media screen and (max-width: 768px){
+    .button1{
+        transform:translateY(280px) ;
+    }
+}
 .button2 {
     text-decoration: none;
     width: 220px;
@@ -172,7 +181,11 @@ p{
     transform:translateY(300px) ;
     margin-bottom: 30px;
 }
-
+@media screen and (max-width: 768px){
+    .button2{
+        transform:translateY(-20px) ;
+    }
+}
 .button1:hover {
     border:1px solid #556cb7;
     background-color: #82aaaa;
@@ -184,6 +197,8 @@ p{
     background-color: #82aaaa;
     color: #4c59a4;
 }
+
+
 
 .startMessage{
     display: block;
